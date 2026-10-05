@@ -22,7 +22,7 @@ def P2():
     xred, yred = x[::red, ::red], y[::red,::red]
     dxred, dyred = dx[::red, ::red], dy[::red,::red]
     
-    plt.quiver(xred,yred,dxred,dyred, scale = 3)
+    plt.quiver(xred,yred,dxred,dyred,scale = 3)
     
     
     plt.show()
