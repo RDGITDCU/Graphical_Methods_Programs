@@ -23,7 +23,7 @@ def P1():
     plt.quiverkey(q, x_pos, y_pos, key_size, 'Magnitude = 2', labelpos='E',coordinates='axes')
     plt.show()
     
-def P2():
+def P1OG():
     x, y = np.meshgrid(np.linspace(0,2 * np.pi, 101), np.linspace(0,2 * np.pi,101))
     vx = np.cos(x) * y 
     vy = np.sin(x) * x
