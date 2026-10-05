@@ -14,7 +14,8 @@ def P2():
     plt.xlabel('x')
     plt.ylabel('y')
     
-    plt.contourf(x, y, z, 20)  # plot a contour map using N=20 levels
+    plt.contourf(x, y, z, 25)  # plot a contour map using N=20 levels
+    plt.contour(x,y,z,25, colors = 'k')
     plt.set_cmap('coolwarm')
     
     plt.show()
