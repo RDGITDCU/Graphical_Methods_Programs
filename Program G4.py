@@ -94,17 +94,13 @@ def P4B():
 
     global r, K
 
-    r = 1
-    K = 10
-
+    r = 0.5
+    K = 8
     t0 = 0
     tf = 20
     n = 201
-
     t = np.linspace(t0, tf, n)
-
     initial_conditions = [0.1, 1, 5, 15]
-
     plt.figure(figsize=(6,6))
 
     for x0 in initial_conditions:
@@ -123,13 +119,12 @@ def P4B():
             label=f'x0={x0}'
         )
 
-    plt.xlabel('t')
+    plt.xlabel('Time (s)')
     plt.xlim(0,tf)
     plt.ylim(0)
-    plt.ylabel('x(t)')
-    plt.title(f'Verhulst Model (r={r}, K={K})')
+    plt.ylabel('Population, x(t)')
+    plt.title(f'r={r}, K={K}')
     plt.legend()
-
     plt.show()
     
 P4B()
