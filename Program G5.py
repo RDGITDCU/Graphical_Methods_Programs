@@ -88,3 +88,109 @@ def G5RK():
     plt.show()
     
 G5RK()
+
+def G5PhaseIC():
+
+    global a, b, c, d
+
+    a = 4.0
+    b = 2.0
+    c = 1/3
+    d = 1.0
+
+    t0 = 0
+    tf = 20
+
+    t = np.linspace(t0, tf, 1000)
+
+    initial_conditions = [
+        (4.0, 2.0),
+        (3.0, 2.0),
+        (5.0, 2.5),
+        (2.0, 1.5)
+    ]
+
+    plt.figure(figsize=(6,6))
+
+    for x0, y0 in initial_conditions:
+
+        result = integrate.solve_ivp(
+            fun=LV,
+            t_span=(t0, tf),
+            y0=[x0, y0],
+            method='RK45',
+            t_eval=t
+        )
+
+        x = result.y[0]
+        y = result.y[1]
+
+        plt.plot(
+            x,
+            y,
+            label=f'x0={x0}, y0={y0}'
+        )
+
+    plt.xlabel('Rabbits, x')
+    plt.ylabel('Foxes, y')
+    plt.title('Lotka-Volterra Phase Space')
+    plt.legend()
+
+    plt.show()
+
+G5PhaseIC()
+
+def G5ParameterVariation():
+
+    params = [
+    (4.0, 2.0, 1/3, 1.0),   # baseline
+    (6.0, 2.0, 1/3, 1.0),   # change a
+    (4.0, 3.0, 1/3, 1.0),   # change b
+    (4.0, 2.0, 0.5, 1.0),   # change c
+    (4.0, 2.0, 1/3, 2.0)    # changing d
+]
+
+    t0 = 0
+    tf = 20
+
+    t = np.linspace(t0, tf, 1000)
+
+    x0 = 4.0
+    y0 = 2.0
+
+    plt.figure(figsize=(6,6))
+
+    for av, bv, cv, dv in params:
+
+        global a, b, c, d
+
+        a = av
+        b = bv
+        c = cv
+        d = dv
+
+        result = integrate.solve_ivp(
+            fun=LV,
+            t_span=(t0, tf),
+            y0=[x0, y0],
+            method='RK45',
+            t_eval=t
+        )
+
+        x = result.y[0]
+        y = result.y[1]
+
+        plt.plot(
+            x,
+            y,
+            label=f'a={a}, b={b}, c={c:.2f}, d={d}'
+        )
+
+    plt.xlabel('Rabbits, x')
+    plt.ylabel('Foxes, y')
+    plt.title('Parameter Variation')
+    plt.legend()
+
+    plt.show()
+
+G5ParameterVariation()
