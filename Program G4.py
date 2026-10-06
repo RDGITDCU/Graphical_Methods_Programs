@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy import integrate
 """
 def P4():
 
@@ -86,3 +86,50 @@ def P4():
     plt.show()
 
 P4()
+
+def verhulst(t, x):
+    return r * x * (1 - x/K)
+
+def P4B():
+
+    global r, K
+
+    r = 1
+    K = 10
+
+    t0 = 0
+    tf = 20
+    n = 201
+
+    t = np.linspace(t0, tf, n)
+
+    initial_conditions = [0.1, 1, 5, 15]
+
+    plt.figure(figsize=(6,6))
+
+    for x0 in initial_conditions:
+
+        result = integrate.solve_ivp(
+            fun=verhulst,
+            t_span=(t0, tf),
+            y0=[x0],
+            method='RK45',
+            t_eval=t
+        )
+
+        plt.plot(
+            result.t,
+            result.y[0],
+            label=f'x0={x0}'
+        )
+
+    plt.xlabel('t')
+    plt.xlim(0,tf)
+    plt.ylim(0)
+    plt.ylabel('x(t)')
+    plt.title(f'Verhulst Model (r={r}, K={K})')
+    plt.legend()
+
+    plt.show()
+    
+P4B()
