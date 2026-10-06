@@ -7,14 +7,15 @@ def LVfield():
     b = 2
     c = 1/3
     d = 1
-    coords = np.linspace(-2, 10 , 21)
+    coords = np.linspace(0, 6 , 21)
     x,y = np.meshgrid(coords,coords)
     dxdt = (a*x) - (b*x*y)
     dydt = (c*x*y) -(d*y)
+    seed = np.array([[4.0, 2.0]])
     
     plt.figure(figsize=(6,6))
-    plt.quiver(x, y, dxdt, dydt)
-    plt.streamplot(x, y, dxdt, dydt)
+    plt.quiver(x, y, dxdt, dydt,scale=500)
+    plt.streamplot(x, y, dxdt, dydt,start_points=seed,color='red',linewidth=2)
     plt.xlabel('Rabbits, x')
     plt.ylabel('Foxes, y')
     plt.title(f'a = {a:.2f}, b = {b:.2f}, c = {c:.2f}, d = {d:.2f}')
@@ -41,7 +42,6 @@ def G5RK():
     b = 2.0
     c = 1/3
     d = 1.0
-
     t0 = -2
     tf = 10
 
@@ -77,6 +77,14 @@ def G5RK():
 
     plt.legend()
 
+    plt.show()
+    
+    plt.figure(figsize=(6,6))
+
+    plt.plot(x, y)
+    plt.xlabel('Rabbits, x')
+    plt.ylabel('Foxes, y')
+    plt.title(f'x0={x0}, y0={y0}')
     plt.show()
     
 G5RK()
