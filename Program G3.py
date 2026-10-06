@@ -44,7 +44,32 @@ def P3():
     
 P3()
 
-"""
+def P3SHMCon():
+    plt.close('all')
+    coords = np.linspace(-3, 3, 21)
+    x, v = np.meshgrid(coords, coords)
+    w = 1 
+    dxdt = v
+    dvdt = - w **2 * x
+    a = np.sqrt(dxdt **2 + dvdt**2)
+    
+    plt.figure(figsize=(6,6))
+    plt.gca().set_aspect('equal', adjustable='box')  # Make plot box square
+    plt.xlabel('x')
+    plt.ylabel('v')
+    plt.title('SHM')
+    plt.quiver(x,v,dxdt,dvdt)
+    lw = 3 * a/a.max()
+    strm = plt.streamplot(x, v, dxdt, dvdt, linewidth=lw, color=a, cmap='gnuplot')
+    plt.colorbar(strm.lines, fraction=0.046, pad=0.04)
+    
+    plt.show()
+    
+P3SHMCon()
+
+  
+
+
 def P3DHM():
     plt.close('all')
     coords = np.linspace(-3, 3, 21)
@@ -52,6 +77,7 @@ def P3DHM():
     w = 1 
     dxdt = v
     dvdt = - w **2 * x
+    A = np.sqrt(dxdt **2 + dvdt**2)
     
     plt.figure(figsize=(6,6))
     plt.gca().set_aspect('equal', adjustable='box')  # Make plot box square
@@ -60,5 +86,5 @@ def P3DHM():
     plt.title('SHM')
     plt.quiver(x,v,dxdt,dvdt)
     plt.streamplot(x,v,dxdt,dvdt)
-"""
+
     
