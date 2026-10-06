@@ -75,16 +75,22 @@ def P3DHM():
     coords = np.linspace(-3, 3, 21)
     x, v = np.meshgrid(coords, coords)
     w = 1 
+    B = 0.1
     dxdt = v
-    dvdt = - w **2 * x
-    A = np.sqrt(dxdt **2 + dvdt**2)
-    
+    dvdt =(-B*v) - w **2 * x
+    a = np.sqrt(dxdt **2 + dvdt**2)
     plt.figure(figsize=(6,6))
     plt.gca().set_aspect('equal', adjustable='box')  # Make plot box square
     plt.xlabel('x')
     plt.ylabel('v')
-    plt.title('SHM')
+    plt.title('DHM')
     plt.quiver(x,v,dxdt,dvdt)
-    plt.streamplot(x,v,dxdt,dvdt)
+    lw = 3 * a/a.max()
+    strm = plt.streamplot(x, v, dxdt, dvdt, linewidth=lw, color=a, cmap='gnuplot')
+    plt.colorbar(strm.lines, fraction=0.046, pad=0.04)
+    
+    plt.show()
+    
+P3DHM()
 
     
