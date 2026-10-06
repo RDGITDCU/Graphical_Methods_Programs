@@ -147,7 +147,7 @@ def P3Compare():
 
     fig.colorbar(strm2.lines, ax=ax)
 
-    plt.tight_layout()
+   
     plt.show()
 
 P3Compare()
